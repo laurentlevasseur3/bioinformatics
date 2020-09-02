@@ -1,5 +1,3 @@
-
-#might make a class, with path, text, freq_table, and ori variables
 def PatternCount(text, pattern):
     count = 0
     for i in range(len(text)):
