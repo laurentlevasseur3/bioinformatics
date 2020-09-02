@@ -46,6 +46,24 @@ def find_ori(path, k):
     ori = max_rep(table)
     return ori
 
+def findClumps(text, k, L, t): #k is size of k-mer, L size of region searching, t is frequency 
+    ans = []
+    for i in range(len(text)):
+        length = i + L
+        if length < len(text):
+            region = text[i:length] #takes the region of however many characters, make frequency table, find the patterns of length k that repeat at least t times
+            table = frequency(region, k)
+            toAdd = loc_rep(table, t)
+            #now to check for repeats:
+            for j in range(len(toAdd)):
+                inAns = False
+                for b in range(len(ans)):
+                    if (ans[b] == toAdd[j]):
+                        inAns = True
+                if not inAns:
+                    ans.append(toAdd[j])
+    return ans
+
 def main():
     ori = find_ori('bio_data/Vibrio_cholerae.txt', 9)
     print(ori)
