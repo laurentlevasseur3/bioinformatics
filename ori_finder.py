@@ -89,7 +89,7 @@ def min_skew(text): #G - C
         if (text[i] == "C"):
             skew_count = skew_count - 1
         elif (text[i] == "G"):
-            skew_count == skew_count + 1
+            skew_count = skew_count + 1
         skew_count_arr.append(skew_count)
 
     for i in range(len(skew_count_arr)):
