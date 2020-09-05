@@ -80,7 +80,7 @@ def findClumps(text, k, L, t): #k is size of k-mer, L size of region searching, 
                     ans.append(toAdd[j])
     return ans
 
-def min_skew(text): #G - C
+def min_skew(text): #G - C, used to find DnaA box regions due to DNA replication stuff
     skew_count = 0
     skew_count_arr = []
     arr_min = 0
@@ -101,3 +101,23 @@ def min_skew(text): #G - C
             indeces.append(i)
     return indeces
     
+def HammingDistance(a, b):
+    count = 0
+    for i in range(len(a)):
+        if(a[i] != b[i]):
+            count = count + 1
+    return count
+
+def ApproxPatternMatch(pattern, text, d):
+    table = frequency(text, len(pattern))
+    match_arr = []
+    pos = []
+    for i in table.keys():
+        if (HammingDistance(pattern, i) <= d):
+            match_arr.append(i)      
+    for i in range(len(text)):
+        end = i + len(pattern)
+        if end < len(text):
+            if (text[i:end] in match_arr):
+                pos.append(i)
+    return pos
