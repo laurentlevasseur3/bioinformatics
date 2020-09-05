@@ -1,8 +1,10 @@
 def PatternCount(text, pattern):
     count = 0
     for i in range(len(text)):
-        if text[i:len(pattern)] == pattern:
-            count = count + 1
+        end = i + len(pattern)
+        if (end < len(text)):
+            if text[i:end] == pattern:
+                count = count + 1
     return count
 
 #make frequency table of k-mers,
@@ -37,12 +39,28 @@ def loc_rep(table, reps): #input frequency table, repetitions
     return keys
 
 #find likely ori given dataset
-def find_ori(path, k):
+def find_most_common(path, k):
     data = open(path, 'r')
     text = data.read()
     table = frequency(text, k)
     ori = max_rep(table)
     return ori
+
+def reverse_complement(text): #finds the reverse complement of a gene
+    comp_key = {'A':'T', 'T':'A', 'C':'G', 'G':'C'}
+    comp = ""
+    for i in range(len(text) - 1, -1, -1):
+        comp = comp + comp_key[text[i]]
+    return comp
+
+def pattern_match(text, pattern): #finds indeces of pattern occurences
+    appearances = []
+    for i in range(len(text)):
+        end = i + len(pattern)
+        if (end < len(text)):
+            if text[i:end] == pattern:
+                appearances.append(i)
+    return appearances
 
 def findClumps(text, k, L, t): #k is size of k-mer, L size of region searching, t is frequency 
     ans = []
@@ -82,10 +100,4 @@ def min_skew(text): #G - C
         if (skew_count_arr[i] == arr_min):
             indeces.append(i)
     return indeces
-
-def main():
-    ori = find_ori('bio_data/Vibrio_cholerae.txt', 9)
-    print(ori)
-
-if __name__ == "__main__":
-    main()
+    
