@@ -62,6 +62,27 @@ def findClumps(text, k, L, t): #k is size of k-mer, L size of region searching, 
                     ans.append(toAdd[j])
     return ans
 
+def min_skew(text): #G - C
+    skew_count = 0
+    skew_count_arr = []
+    arr_min = 0
+    indeces = []
+    for i in range(len(text)):
+        if (text[i] == "C"):
+            skew_count = skew_count - 1
+        elif (text[i] == "G"):
+            skew_count == skew_count + 1
+        skew_count_arr.append(skew_count)
+
+    for i in range(len(skew_count_arr)):
+        if (skew_count_arr[i] < arr_min):
+            arr_min = skew_count_arr[i]
+
+    for i in range(len(skew_count_arr)):
+        if (skew_count_arr[i] == arr_min):
+            indeces.append(i)
+    return indeces
+
 def main():
     ori = find_ori('bio_data/Vibrio_cholerae.txt', 9)
     print(ori)
