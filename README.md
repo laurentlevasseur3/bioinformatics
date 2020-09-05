@@ -3,8 +3,10 @@ basic functionality for manipulating biological data
 
 in development
 
+CONTENTS:
 
-FUNCTIONS:
+1. `ori_finder.py`
+  The purpose of this file is to provide features to help find the origin of replication (ori) of a genome. It provides features to analyze text for repeated patterns                         and other features that can help locate the ori.
 
 -`PatternCount(text, pattern)` returns number of instances of a certain pattern in the given text. Useful for finding the number of times a given DNA fragment appears in a genome. Inputs: `text`, the genome, and `pattern`, the DNA fragment, such as `"CTGAAAGC"`. Runs in `O(N)` time, where `N` is the size of the dataset.
 
